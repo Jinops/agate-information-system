@@ -6,26 +6,33 @@ from Class import Campaign
 
 app = FastAPI()
 
+
 @app.get("/")
 async def main():
   return "OK"
 
+
 ## client
+
 
 @app.get("/client")
 async def get_all_client():
   res = Client.get_all()
   return res
 
+
 @app.get("/client/{id}")
 async def get_client(id: int):
   res = Client.get(id)
   return res
 
+
 @app.post("/client/add")
-async def add_client(req:Client.Client):
+async def add_client(req: Client.Client):
   Client.add(req.staff_id, req.name, req.tel_number)
   return {}
+
+
 '''
 {
   "staff_id":1,
@@ -36,22 +43,27 @@ async def add_client(req:Client.Client):
 
 ## campaign
 
+
 @app.get("/campaign")
-async def get_all_client():
+async def get_all_campaign():
   res = Campaign.get_all()
   return res
+
 
 @app.get("/campaign/{id}")
 async def get_campaign(id: int):
   result = Campaign.get(id)
   return result
 
+
 @app.post("/campaign/add")
-async def add_campaign(req:Campaign.Campaign):
+async def add_campaign(req: Campaign.Campaign):
   Campaign.add(req.client_id, req.title, req.advert_id_list, req.start_date, req.end_date)
   return "OK"
-  
+
+
 ## test
+
 
 @app.get("/test")
 async def generate_test_data():
@@ -64,6 +76,10 @@ async def generate_test_data():
   Client.add(staff_id=3, name="Apple", tel_number="010-0000")
   Client.add(staff_id=4, name="수원시청", tel_number="010-0000")
 
+  Campaign.add(client_id=1, title="하반기 광고", advert_id_list=[], start_date="", end_date="")
+  Campaign.add(client_id=1, title="하반기 광고", advert_id_list=[])
+
   return "OK"
+
 
 uvicorn.run(app, host="0.0.0.0", port="8000")
