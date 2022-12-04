@@ -1,3 +1,5 @@
+import datetime
+
 def get_new_id(db):
     count = len(db)
     if count == 0:
@@ -11,3 +13,10 @@ def search(dict_list, key, value):
         if dict[key] == value:
             return dict
     return {}
+
+
+def get_today():
+    return datetime.datetime.today()
+
+def get_day_after(day):
+    return datetime.datetime.today() + datetime.timedelta(days=day)

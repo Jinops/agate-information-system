@@ -1,9 +1,10 @@
 from pydantic import BaseModel
+from typing import Optional
 from . import utils
 
 
 class Client(BaseModel):
-  id: int = None
+  id: Optional[int] = None
   staff_id: int
   name: str
   tel_number: str
@@ -11,7 +12,7 @@ class Client(BaseModel):
 db = []  # dictionary list
 
 
-def add_client(client):
+def add_client(client: Client):
   client.id = utils.get_new_id(db)
   db.append(dict)
 
