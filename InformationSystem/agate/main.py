@@ -15,10 +15,7 @@ async def get_all_client():
 
 @app.post("/client/add")
 async def add_client(req:Client.Client):
-  new_clinet = Client.Client(staff_id=req.staff_id,
-                             name=req.name,
-                             tel_number=req.tel_number)
-  Client.add_client(new_clinet)
+  Client.add_client(req)
   return "OK"
 
 @app.get("/client/{id}")
@@ -28,14 +25,14 @@ async def get_client(id: int):
 
 @app.get("/test")
 async def generate_test_data():
-  Client.add_client(Client.Client(staff_id=1, name="오리온", tel_number="010-0000"))
-  Client.add_client(Client.Client(staff_id=1, name="삼성", tel_number="010-0000"))
-  Client.add_client(Client.Client(staff_id=1, name="LG", tel_number="010-0000"))
-  Client.add_client(Client.Client(staff_id=2, name="롯데", tel_number="010-0000"))
-  Client.add_client(Client.Client(staff_id=2, name="코카콜라", tel_number="010-0000"))
-  Client.add_client(Client.Client(staff_id=2, name="카시오", tel_number="010-0000"))
-  Client.add_client(Client.Client(staff_id=3, name="Apple", tel_number="010-0000"))
-  Client.add_client(Client.Client(staff_id=4, name="수원시청", tel_number="010-0000"))
+  Client.add_client({"staff_id":1, "name":"오리온", "tel_number":"010-0000"})
+  Client.add_client({"staff_id":1, "name":"삼성", "tel_number":"010-0000"})
+  Client.add_client({"staff_id":1, "name":"LG", "tel_number":"010-0000"})
+  Client.add_client({"staff_id":2, "name":"롯데", "tel_number":"010-0000"})
+  Client.add_client({"staff_id":2, "name":"코카콜라", "tel_number":"010-0000"})
+  Client.add_client({"staff_id":2, "name":"카시오", "tel_number":"010-0000"})
+  Client.add_client({"staff_id":3, "name":"Apple", "tel_number":"010-0000"})
+  Client.add_client({"staff_id":4, "name":"수원시청", "tel_number":"010-0000"})
 
   return "OK"
 
