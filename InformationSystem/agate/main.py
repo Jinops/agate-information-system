@@ -46,8 +46,13 @@ async def get_all_campaign():
 
 @app.get("/campaign/{id}")
 async def get_campaign(id: int):
-  result = Campaign.get(id)
-  return result
+  res = Campaign.get(id)
+  return res
+
+@app.get("/campaign/by_client/{client_id}")
+async def get_campaign_by_client(client_id: int):
+  res = Campaign.get_list_by_client(client_id)
+  return res
 
 @app.post("/campaign/add")
 async def add_campaign(req: Campaign.Campaign):

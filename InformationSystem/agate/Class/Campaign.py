@@ -19,7 +19,7 @@ def add(client_id, title, advert_id_list, start_date, end_date):
   if start_date is None and end_date is None:
     start_date = utils.get_today()
     end_date = utils.get_day_after(7)
-    
+
   dict = {
     "id": utils.get_new_id(db),
     "client_id": client_id,
@@ -33,6 +33,10 @@ def add(client_id, title, advert_id_list, start_date, end_date):
 
 def get(id: int):
   return utils.search(db, 'id', id)
+
+
+def get_list_by_client(client_id: int):
+  return utils.searches(db, 'client_id', client_id)
 
 
 def get_all():
