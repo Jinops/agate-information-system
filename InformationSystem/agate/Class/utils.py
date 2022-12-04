@@ -16,7 +16,7 @@ def search(dict_list, key, value):
 
 
 def get_today():
-    return datetime.datetime.today()
+    return str(datetime.datetime.today())
 
 def get_day_after(day):
-    return datetime.datetime.today() + datetime.timedelta(days=day)
+    return str(datetime.datetime.today() + datetime.timedelta(days=day))
