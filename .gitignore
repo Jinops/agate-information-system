@@ -1,7 +1,3 @@
-
-Information System/.DS_Store
-Information System/agate/.DS_Store
-Information System/agate/Class/.DS_Store
 *.pyc
 *.DS_Store
 poetry.lock
