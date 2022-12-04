@@ -1,12 +1,12 @@
-import Staff
-import Client
-import Campaign
-import Advert
+from Class import Client
 
-import db
+Client.add_client(Client.Client(1, "테스트", ""))
+Client.add_client(Client.Client(1, "테스트2", ""))
+Client.add_client(Client.Client(1, "테스트3", ""))
 
-test_client = Client.Client(1, "테스트", "010-0000-1234")
+print(Client.get_all_client())
+print(Client.get_client(2))
 
-test_client.add_client()
-
-print("저장:", db.client[0].dict())
+c = Client.Client(1, "테4","")
+Client.add_client(c)
+print(Client.get_all_client())
