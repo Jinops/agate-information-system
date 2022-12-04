@@ -15,18 +15,6 @@ async def main():
 ## client
 
 
-@app.get("/client")
-async def get_all_client():
-  res = Client.get_all()
-  return res
-
-
-@app.get("/client/{id}")
-async def get_client(id: int):
-  res = Client.get(id)
-  return res
-
-
 @app.post("/client/add")
 async def add_client(req: Client.Client):
   Client.add(req.staff_id, req.name, req.tel_number)
@@ -41,7 +29,27 @@ async def add_client(req: Client.Client):
 }
 '''
 
+
+@app.get("/client")
+async def get_all_client():
+  res = Client.get_all()
+  return res
+
+
+@app.get("/client/{id}")
+async def get_client(id: int):
+  res = Client.get(id)
+  return res
+
+
 ## campaign
+
+
+@app.post("/campaign/add")
+async def add_campaign(req: Campaign.Campaign):
+  Campaign.add(req.client_id, req.title, req.advert_id_list, req.start_date,
+               req.end_date)
+  return "OK"
 
 
 @app.get("/campaign")
@@ -50,16 +58,10 @@ async def get_all_campaign():
   return res
 
 
-@app.get("/campaign/{id}")
-async def get_campaign(id: int):
-  result = Campaign.get(id)
-  return result
-
-
-@app.post("/campaign/add")
-async def add_campaign(req: Campaign.Campaign):
-  Campaign.add(req.client_id, req.title, req.advert_id_list, req.start_date, req.end_date)
-  return "OK"
+# @app.get("/campaign/{id}")
+# async def get_campaign(id: int):
+#   result = Campaign.get(id)
+#   return result
 
 
 ## test
@@ -76,7 +78,11 @@ async def generate_test_data():
   Client.add(staff_id=3, name="Apple", tel_number="010-0000")
   Client.add(staff_id=4, name="수원시청", tel_number="010-0000")
 
-  Campaign.add(client_id=1, title="하반기 광고", advert_id_list=[], start_date="", end_date="")
+  Campaign.add(client_id=1,
+               title="하반기 광고",
+               advert_id_list=[],
+               start_date="",
+               end_date="")
   Campaign.add(client_id=1, title="하반기 광고", advert_id_list=[])
 
   return "OK"
