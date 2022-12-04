@@ -1,6 +1,8 @@
-from Class import Client
 from fastapi import FastAPI
 import uvicorn
+
+from Class import Client
+from Class import Campaign
 
 app = FastAPI()
 
@@ -8,20 +10,41 @@ app = FastAPI()
 async def main():
   return "OK"
 
+## client
+
 @app.get("/client")
 async def get_all_client():
-  result = Client.get_all_client()
-  return result
+  res = Client.get_all_client()
+  return res
+
+@app.get("/client/{id}")
+async def get_client(id: int):
+  res = Client.get_client(id)
+  return res
 
 @app.post("/client/add")
 async def add_client(req:Client.Client):
   Client.add_client(req)
   return "OK"
 
-@app.get("/client/{id}")
-async def get_client(id: int):
-  result = Client.get_client(id)
+## campaign
+
+@app.get("/campaign")
+async def get_all_client():
+  res = Campaign.add_campaign()
+  return res
+
+@app.get("/campaign/{id}")
+async def get_campaign(id: int):
+  result = Campaign.get_client(id)
   return result
+
+@app.post("/campaign/add")
+async def add_campaign(req:Campaign.Campaign):
+  Campaign.add_campaign(req)
+  return "OK"
+
+## test
 
 @app.get("/test")
 async def generate_test_data():
