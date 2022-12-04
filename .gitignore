@@ -7,4 +7,5 @@ Information System/agate/Class/.DS_Store
 poetry.lock
 pyproject.toml
 replit.nix
+.replit
 venv/
