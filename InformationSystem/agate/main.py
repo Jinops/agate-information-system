@@ -1,42 +1,42 @@
 from Class import Client
-
-Client.add_client(Client.Client(1, "테스트", ""))
-Client.add_client(Client.Client(1, "테스트2", ""))
-Client.add_client(Client.Client(1, "테스트3", ""))
-
-print(Client.get_all_client())
-print(Client.get_client(2))
-
-c = Client.Client(1, "테4", "")
-Client.add_client(c)
-print(Client.get_all_client())
-
 from fastapi import FastAPI
-from fastapi.responses import HTMLResponse, PlainTextResponse, RedirectResponse
-from enum import Enum
-from pydantic import BaseModel
 import uvicorn
 
 app = FastAPI()
 
+@app.get("/")
+async def main():
+  return "OK"
 
 @app.get("/client")
 async def get_all_client():
   result = Client.get_all_client()
-  return {}
+  return result
 
 @app.post("/client/add")
-async def add_client(req):
+async def add_client(req:Client.Client):
   new_clinet = Client.Client(staff_id=req.staff_id,
                              name=req.name,
                              tel_number=req.tel_number)
   Client.add_client(new_clinet)
-  return {}
-
+  return "OK"
 
 @app.get("/client/{id}")
 async def get_client(id: int):
   result = Client.get_client(id)
-  return {}
+  return result
+
+@app.get("/test")
+async def generate_test_data():
+  Client.add_client(Client.Client(staff_id=1, name="오리온", tel_number="010-0000"))
+  Client.add_client(Client.Client(staff_id=1, name="삼성", tel_number="010-0000"))
+  Client.add_client(Client.Client(staff_id=1, name="LG", tel_number="010-0000"))
+  Client.add_client(Client.Client(staff_id=2, name="롯데", tel_number="010-0000"))
+  Client.add_client(Client.Client(staff_id=2, name="코카콜라", tel_number="010-0000"))
+  Client.add_client(Client.Client(staff_id=2, name="카시오", tel_number="010-0000"))
+  Client.add_client(Client.Client(staff_id=3, name="Apple", tel_number="010-0000"))
+  Client.add_client(Client.Client(staff_id=4, name="수원시청", tel_number="010-0000"))
+
+  return "OK"
 
 uvicorn.run(app, host="0.0.0.0", port="8000")
