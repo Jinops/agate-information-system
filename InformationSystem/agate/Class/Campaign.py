@@ -8,18 +8,14 @@ class Campaign(BaseModel):
   client_id: int = None
   title: str = ""
   advert_id_list: List[int] = []
-  start_date: str = ""
-  end_date: str = ""
+  start_date: str = utils.get_today()
+  end_date: str = utils.get_day_after(7)
 
 
 db = []
 
 
 def add(client_id, title, advert_id_list, start_date = None, end_date = None):
-  if start_date is None and end_date is None:
-    start_date = utils.get_today()
-    end_date = utils.get_day_after(7)
-
   dict = {
     "id": utils.get_new_id(db),
     "client_id": client_id,

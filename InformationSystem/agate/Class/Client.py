@@ -22,7 +22,6 @@ def add(staff_id, name, tel_number):
   }
   db.append(dict)
 
-
 def get(id: int):
   return utils.search(db, 'id', id)
 
