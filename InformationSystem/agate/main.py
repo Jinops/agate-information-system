@@ -22,9 +22,23 @@ tags_metadata = [
 ]  # https://ie.jinwoop.repl.co/docs
 app = FastAPI(openapi_tags=tags_metadata)
 
-@app.get("/")
-async def main():
-  return "OK"
+
+## staff
+
+@app.get("/staff", tags=["staff"])
+async def get_all_staff():
+  res = staff.get_all()
+  return res
+
+@app.post("/staff", tags=["staff"])
+async def add_staff(req: staff.Staff):
+  res = staff.add(req.name, req.tel_number, req.grade)
+  return res
+
+@app.get("/staff/{id}", tags=["staff"])
+async def get_staff(id: int):
+  res = staff.get(id)
+  return res
 
 ## client
 
@@ -33,14 +47,14 @@ async def get_all_client():
   res = client.get_all()
   return res
 
+@app.post("/clients", tags=["clients"])
+async def add_client(req: client.Client):
+  res = client.add(req.staff_id, req.name, req.tel_number)
+  return res
+
 @app.get("/clients/{id}", tags=["clients"])
 async def get_client(id: int):
   res = client.get(id)
-  return res
-
-@app.post("/clients", tags=["clients"])
-async def add_client(req: client.Client, ):
-  res = client.add(req.staff_id, req.name, req.tel_number)
   return res
 
 ## campaign
@@ -48,6 +62,11 @@ async def add_client(req: client.Client, ):
 @app.get("/campaigns", tags=["campaigns"])
 async def get_all_campaign():
   res = campaign.get_all()
+  return res
+
+@app.post("/campaigns", tags=["campaigns"])
+async def add_campaign(req: campaign.Campaign):
+  res = campaign.add(req.client_id, req.title, req.start_date, req.end_date)
   return res
 
 @app.get("/campaigns/{id}", tags=["campaigns"])
@@ -60,16 +79,16 @@ async def get_campaign_by_client(client_id: int):
   res = campaign.get_list_by_client(client_id)
   return res
 
-@app.post("/campaigns", tags=["campaigns"])
-async def add_campaign(req: campaign.Campaign):
-  res = campaign.add(req.client_id, req.title, req.start_date, req.end_date)
-  return res
-
 ## advert
 
 @app.get("/adverts", tags=["adverts"])
 async def get_all_advert():
   res = advert.get_all()
+  return res
+
+@app.post("/adverts", tags=["adverts"])
+async def add_advert(req: advert.Advert):
+  res = advert.add(req.campaign_id, req.title, req.content, req.progress, req.start_date, req.end_date)
   return res
 
 @app.get("/adverts/{id}", tags=["adverts"])
@@ -82,11 +101,6 @@ async def update_advert(id: int, req: Request):
   res = advert.update(id, await req.json())
   return res
 
-@app.post("/adverts", tags=["adverts"])
-async def add_advert(req: advert.Advert):
-  res = advert.add(req.campaign_id, req.title, req.content, req.progress, req.start_date, req.end_date)
-  return res
-
 @app.get("/adverts/by_campaign/{campaign_id}", tags=["adverts"])
 async def get_advert_by_campaign(campaign_id: int):
   res = advert.get_list_by_campaign(campaign_id)
@@ -94,12 +108,16 @@ async def get_advert_by_campaign(campaign_id: int):
 
 ## test
 
+@app.get("/")
+async def main():
+  return "OK"
+
 @app.get("/test")
 async def generate_test_data():
-  staff.add("진우", "010-0000", staff.staff_grade.CAMPAIGN_STAFF)
-  staff.add("혁중", "010-0000", staff.staff_grade.ACCOUNTANT)
-  staff.add("도영", "010-0000", staff.staff_grade.CONTACT_STAFF)
-  staff.add("채민", "010-0000", staff.staff_grade.STAFF)
+  staff.add("진우", "010-0000", staff.Staff_grade.CAMPAIGN_STAFF)
+  staff.add("혁중", "010-0000", staff.Staff_grade.ACCOUNTANT)
+  staff.add("도영", "010-0000", staff.Staff_grade.CONTACT_STAFF)
+  staff.add("채민", "010-0000", staff.Staff_grade.STAFF)
 
   client.add(staff_id=1, name="오리온", tel_number="010-0000")
   client.add(staff_id=1, name="삼성", tel_number="010-0000")

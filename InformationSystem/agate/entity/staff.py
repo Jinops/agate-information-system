@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import Union
 from enum import Enum
-import utils
+from . import utils
 
 class Staff_grade(Enum):
     STAFF = 1
@@ -26,3 +26,9 @@ def add(name, tel_number, grade):
   }
   db.append(dict)
   return dict
+  
+def get(id: int):
+  return utils.search(db, 'id', id)
+
+def get_all():
+  return db
