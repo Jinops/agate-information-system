@@ -136,7 +136,7 @@ async def main():
 async def generate_test_data():
   staff.add("진우", "010-0000", staff.Staff_grade.CAMPAIGN_STAFF)
   staff.add("혁중", "010-0000", staff.Staff_grade.ACCOUNTANT)
-  staff.add("도영", "010-0000", staff.Staff_grade.CAMPAIGN_MANAGER))
+  staff.add("도영", "010-0000", staff.Staff_grade.CAMPAIGN_MANAGER)
   staff.add("채민", "010-0000", staff.Staff_grade.STAFF)
 
   client.add(staff_id=1, name="오리온", tel_number="010-0000")
