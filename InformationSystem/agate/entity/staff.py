@@ -7,7 +7,8 @@ class Staff_grade(Enum):
     STAFF = 1
     CONTACT_STAFF = 2
     CAMPAIGN_STAFF = 3
-    ACCOUNTANT = 4
+    CAMPAIGN_MANAGER = 4
+    ACCOUNTANT = 5
 
 class Staff(BaseModel):
     id: Union[int, None]

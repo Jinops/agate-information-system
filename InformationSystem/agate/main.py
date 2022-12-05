@@ -30,22 +30,22 @@ app = FastAPI(openapi_tags=tags_metadata)
 
 ## staff
 
-@app.get("/staff", tags=["staff"], response_model=List[staff.Staff])
+@app.get("/staffs", tags=["staffs"], response_model=List[staff.Staff])
 async def get_all_staff():
   res = staff.get_all()
   return res
 
-@app.post("/staff", tags=["staff"], response_model=Union[staff.Staff,Empty])
+@app.post("/staffs", tags=["staffs"], response_model=Union[staff.Staff,Empty])
 async def add_staff(req: staff.Staff):
   res = staff.add(req.name, req.tel_number, req.grade)
   return res
 
-@app.get("/staff/{id}", tags=["staff"], response_model=Union[staff.Staff,Empty])
+@app.get("/staffs/{id}", tags=["staffs"], response_model=Union[staff.Staff,Empty])
 async def get_staff(id: int):
   res = staff.get(id)
   return res
   
-@app.patch("/staff/{id}", tags=["staff"], response_model=Union[staff.Staff,Empty])
+@app.patch("/staffs/{id}", tags=["staffs"], response_model=Union[staff.Staff,Empty])
 async def update_staff(id: int, req: Request):
   res = staff.update(id, await req.json())
   return res
@@ -136,7 +136,7 @@ async def main():
 async def generate_test_data():
   staff.add("진우", "010-0000", staff.Staff_grade.CAMPAIGN_STAFF)
   staff.add("혁중", "010-0000", staff.Staff_grade.ACCOUNTANT)
-  staff.add("도영", "010-0000", staff.Staff_grade.CONTACT_STAFF)
+  staff.add("도영", "010-0000", staff.Staff_grade.CAMPAIGN_MANAGER))
   staff.add("채민", "010-0000", staff.Staff_grade.STAFF)
 
   client.add(staff_id=1, name="오리온", tel_number="010-0000")
