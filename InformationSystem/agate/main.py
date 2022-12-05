@@ -71,7 +71,7 @@ async def get_campaign_by_client(client_id: int):
 
 @app.post("/campaigns", tags=["campaigns"])
 async def add_campaign(req: Campaign.Campaign):
-  res = Campaign.add(req.client_id, req.title, req.advert_id_list, req.start_date, req.end_date)
+  res = Campaign.add(req.client_id, req.title, req.start_date, req.end_date)
   return res
 
 
@@ -122,19 +122,11 @@ async def generate_test_data():
   Client.add(staff_id=3, name="Apple", tel_number="010-0000")
   Client.add(staff_id=4, name="수원시청", tel_number="010-0000")
 
-  Campaign.add(client_id=1,
-               title="고전 캠페인",
-               advert_id_list=[],
-               start_date="2019-01-01",
-               end_date="2019-12-31")
-  Campaign.add(client_id=2,
-               title="상반기 캠페인",
-               advert_id_list=[1],
-               start_date="2022-01-01",
-               end_date="2022-05-31")
-  Campaign.add(client_id=2, title="12월 연휴 캠페인", advert_id_list=[])
+  Campaign.add(client_id=1, title="고전 캠페인", start_date="2019-01-01", end_date="2019-12-31")
+  Campaign.add(client_id=2, title="12월 연휴 캠페인", start_date="2022-12-01", end_date="")
 
   Advert.add(2, "TV 광고", "방송 3사 광고", "1.기획\n2.집행", "2022-01-01", "2022-05-05")
+  Advert.add(2, "Youtube 광고", "유튜브 인플루은서 광고", "1.컨텍 준비", "2022-04-03", "")
 
   return "OK"
 

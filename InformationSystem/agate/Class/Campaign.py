@@ -7,7 +7,6 @@ class Campaign(BaseModel):
   id: Union[int, None]
   client_id: int = None
   title: str = ""
-  advert_id_list: List[int] = []
   start_date: str = utils.get_today()
   end_date: str = utils.get_day_after(7)
 
@@ -15,12 +14,11 @@ class Campaign(BaseModel):
 db = []
 
 
-def add(client_id, title, advert_id_list, start_date=None, end_date=None):
+def add(client_id, title, start_date=None, end_date=None):
   dict = {
     "id": utils.get_new_id(db),
     "client_id": client_id,
     "title": title,
-    "advert_id_list": advert_id_list,
     "start_date": start_date,
     "end_date": end_date,
   }
