@@ -32,3 +32,6 @@ def get(id: int):
 
 def get_all():
   return db
+
+def update(id, update_data):
+  return utils.update(db, id, update_data)

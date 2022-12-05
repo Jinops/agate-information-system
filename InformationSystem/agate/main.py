@@ -39,6 +39,11 @@ async def add_staff(req: staff.Staff):
 async def get_staff(id: int):
   res = staff.get(id)
   return res
+  
+@app.patch("/staff/{id}", tags=["staff"])
+async def update_staff(id: int, req: Request):
+  res = staff.update(id, await req.json())
+  return res
 
 ## client
 
@@ -57,6 +62,11 @@ async def get_client(id: int):
   res = client.get(id)
   return res
 
+@app.patch("/clients/{id}", tags=["clients"])
+async def update_client(id: int, req: Request):
+  res = client.update(id, await req.json())
+  return res
+  
 ## campaign
 
 @app.get("/campaigns", tags=["campaigns"])
@@ -74,11 +84,16 @@ async def get_campaign(id: int):
   res = campaign.get(id)
   return res
 
+@app.patch("/campaigns/{id}", tags=["campaigns"])
+async def update_campaign(id: int, req: Request):
+  res = campaign.update(id, await req.json())
+  return res
+
 @app.get("/campaigns/by_client/{client_id}", tags=["campaigns"])
 async def get_campaign_by_client(client_id: int):
   res = campaign.get_list_by_client(client_id)
   return res
-
+  
 ## advert
 
 @app.get("/adverts", tags=["adverts"])
