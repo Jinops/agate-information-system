@@ -1,15 +1,15 @@
 from pydantic import BaseModel
-from typing import List, Optional
+from typing import List, Union
 from . import utils
 
 
 class Campaign(BaseModel):
-  id: Optional[int] = None
-  client_id: int
-  title: str
-  advert_id_list: List[int]
-  start_date: Optional[str]
-  end_date: Optional[str]
+  id: Union[int, None]
+  client_id: int = None
+  title: str = ""
+  advert_id_list: List[int] = []
+  start_date: str = ""
+  end_date: str = ""
 
 
 db = []

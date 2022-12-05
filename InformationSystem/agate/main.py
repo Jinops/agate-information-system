@@ -42,19 +42,11 @@ async def get_client(id: int):
   return res
 
 
-@app.post("/clients/add", tags=["clients"])
+@app.post("/clients", tags=["clients"])
 async def add_client(req: Client.Client, ):
   Client.add(req.staff_id, req.name, req.tel_number)
   return {}
 
-
-'''
-{
-  "staff_id":1,
-  "name":"replit",
-  "tel_number":"1234"
-}
-'''
 
 ## campaign
 
@@ -77,9 +69,10 @@ async def get_campaign_by_client(client_id: int):
   return res
 
 
-@app.post("/campaigns/add", tags=["campaigns"])
+@app.post("/campaigns", tags=["campaigns"])
 async def add_campaign(req: Campaign.Campaign):
-  Campaign.add(req.client_id, req.title, req.advert_id_list, req.start_date,req.end_date)
+  Campaign.add(req.client_id, req.title, req.advert_id_list, req.start_date,
+               req.end_date)
   return "OK"
 
 
@@ -104,9 +97,10 @@ async def update_advert(id: int, req: Advert.Advert):
   return res
 
 
-@app.post("/adverts/add", tags=["adverts"])
+@app.post("/adverts", tags=["adverts"])
 async def add_advert(req: Advert.Advert):
-  res = Advert.add(req.campaign_id, req.title, req.content, req.progress, req.start_date, req.end_date)
+  res = Advert.add(req.campaign_id, req.title, req.content, req.progress,
+                   req.start_date, req.end_date)
   return res
 
 
@@ -115,14 +109,6 @@ async def get_advert_by_campaign(campaign_id: int):
   res = Advert.get_list_by_campaign(campaign_id)
   return res
 
-
-'''
-{
-    "client_id": 1,
-    "title": "하반기 캠페인",
-    "advert_id_list": [1,2]
- }
-'''
 
 ## test
 
