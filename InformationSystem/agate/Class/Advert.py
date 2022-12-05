@@ -1,20 +1,20 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import Union
 from . import utils
 
-class Advert:
-  id: Optional[int] = None
-  campaign_id: int
-  title: str
-  content: str
-  progress: str
-  start_date: Optional[str]
-  end_date: Optional[str]
+class Advert(BaseModel):
+  id: Union[int, None]
+  campaign_id: int = None
+  title: str = ""
+  content: str = ""
+  progress: str = ""
+  start_date: str = ""
+  end_date: str = ""
 
 db = []
 
-def add(campaign_id, title, content, progress, start_date = None, end_date = None):
-  if start_date is None and end_date is None:
+def add(campaign_id, title, content, progress, start_date, end_date):
+  if start_date == "" and end_date == "":
     start_date = utils.get_today()
     end_date = utils.get_day_after(7)
     

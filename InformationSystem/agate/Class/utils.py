@@ -25,7 +25,7 @@ def searches(db, key, value):
 def update(db, id, update_data):
   dict = search(db, 'id', id)
   for key in update_data:
-    dict[key] = update_data
+    dict[key] = update_data[key]
 
 
 date_format = ("%Y/%m/%d")

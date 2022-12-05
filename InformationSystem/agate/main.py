@@ -5,7 +5,7 @@ from Class import Client
 from Class import Campaign
 from Class import Advert
 
-tags_metadata = [ 
+tags_metadata = [
   {
     "name": "clients",
     "description": "Agate의 고객",
@@ -18,7 +18,7 @@ tags_metadata = [
     "name": "adverts",
     "description": "개별 광고",
   },
-] # https://ie.jinwoop.repl.co/docs
+]  # https://ie.jinwoop.repl.co/docs
 app = FastAPI(openapi_tags=tags_metadata)
 
 
@@ -79,29 +79,38 @@ async def get_campaign_by_client(client_id: int):
 
 @app.post("/campaigns/add", tags=["campaigns"])
 async def add_campaign(req: Campaign.Campaign):
-  Campaign.add(req.client_id, req.title, req.advert_id_list, req.start_date,
-               req.end_date)
+  Campaign.add(req.client_id, req.title, req.advert_id_list, req.start_date,req.end_date)
   return "OK"
 
 
 ## advert
 
-@app.get("/adverts", tag=["adverts"])
+
+@app.get("/adverts", tags=["adverts"])
 async def get_all_advert():
   res = Advert.get_all()
   return res
 
-@app.get("/adverts/{id}", tag=["adverts"])
+
+@app.get("/adverts/{id}", tags=["adverts"])
 async def get_advert(id: int):
   res = Advert.get(id)
   return res
-  
-@app.put("/adverts/{id}", tag=["adverts"])
-async def get_advert():
-  res = Advert.get()
+
+
+@app.patch("/adverts/{id}", tags=["adverts"])
+async def update_advert(id: int, req: Advert.Advert):
+  res = Advert.update(id, {"content": "updated!"})
   return res
 
-@app.get("/adverts/by_campaign/{campaign_id}", tag=["adverts"])
+
+@app.post("/adverts/add", tags=["adverts"])
+async def add_advert(req: Advert.Advert):
+  res = Advert.add(req.campaign_id, req.title, req.content, req.progress, req.start_date, req.end_date)
+  return res
+
+
+@app.get("/adverts/by_campaign/{campaign_id}", tags=["adverts"])
 async def get_advert_by_campaign(campaign_id: int):
   res = Advert.get_list_by_campaign(campaign_id)
   return res
