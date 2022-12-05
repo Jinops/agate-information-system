@@ -13,6 +13,10 @@ class Empty(BaseModel):
 
 tags_metadata = [
   {
+    "name": "staffs",
+    "description": "Agate의 직원",
+  },
+  {
     "name": "clients",
     "description": "Agate의 고객",
   },
