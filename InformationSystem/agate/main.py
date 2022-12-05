@@ -3,6 +3,7 @@ import uvicorn
 
 from Class import Client
 from Class import Campaign
+from Class import Advert
 
 tags_metadata = [ 
   {
@@ -81,6 +82,29 @@ async def add_campaign(req: Campaign.Campaign):
   Campaign.add(req.client_id, req.title, req.advert_id_list, req.start_date,
                req.end_date)
   return "OK"
+
+
+## advert
+
+@app.get("/adverts", tag=["adverts"])
+async def get_all_advert():
+  res = Advert.get_all()
+  return res
+
+@app.get("/adverts/{id}", tag=["adverts"])
+async def get_advert(id: int):
+  res = Advert.get(id)
+  return res
+  
+@app.put("/adverts/{id}", tag=["adverts"])
+async def get_advert():
+  res = Advert.get()
+  return res
+
+@app.get("/adverts/by_campaign/{campaign_id}", tag=["adverts"])
+async def get_advert_by_campaign(campaign_id: int):
+  res = Advert.get_list_by_campaign(campaign_id)
+  return res
 
 
 '''
