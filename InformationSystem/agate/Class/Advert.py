@@ -27,6 +27,7 @@ def add(campaign_id, title, content, progress, start_date, end_date):
     "end_date": end_date,
   }
   db.append(dict)
+  return dict
 
 
 def get(id: int):
@@ -42,4 +43,4 @@ def get_list_by_campaign(campaign_id: int):
 
 
 def update(id, update_data):
-  utils.update(db, id, update_data)
+  return utils.update(db, id, update_data)

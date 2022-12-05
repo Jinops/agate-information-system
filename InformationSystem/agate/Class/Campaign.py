@@ -15,7 +15,7 @@ class Campaign(BaseModel):
 db = []
 
 
-def add(client_id, title, advert_id_list, start_date = None, end_date = None):
+def add(client_id, title, advert_id_list, start_date=None, end_date=None):
   dict = {
     "id": utils.get_new_id(db),
     "client_id": client_id,
@@ -25,6 +25,7 @@ def add(client_id, title, advert_id_list, start_date = None, end_date = None):
     "end_date": end_date,
   }
   db.append(dict)
+  return dict
 
 
 def get(id: int):

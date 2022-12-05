@@ -44,8 +44,8 @@ async def get_client(id: int):
 
 @app.post("/clients", tags=["clients"])
 async def add_client(req: Client.Client, ):
-  Client.add(req.staff_id, req.name, req.tel_number)
-  return {}
+  res = Client.add(req.staff_id, req.name, req.tel_number)
+  return res
 
 
 ## campaign
@@ -71,9 +71,8 @@ async def get_campaign_by_client(client_id: int):
 
 @app.post("/campaigns", tags=["campaigns"])
 async def add_campaign(req: Campaign.Campaign):
-  Campaign.add(req.client_id, req.title, req.advert_id_list, req.start_date,
-               req.end_date)
-  return "OK"
+  res = Campaign.add(req.client_id, req.title, req.advert_id_list, req.start_date, req.end_date)
+  return res
 
 
 ## advert
@@ -99,8 +98,7 @@ async def update_advert(id: int, req: Advert.Advert):
 
 @app.post("/adverts", tags=["adverts"])
 async def add_advert(req: Advert.Advert):
-  res = Advert.add(req.campaign_id, req.title, req.content, req.progress,
-                   req.start_date, req.end_date)
+  res = Advert.add(req.campaign_id, req.title, req.content, req.progress, req.start_date, req.end_date)
   return res
 
 
