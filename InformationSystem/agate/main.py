@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 import uvicorn
 
 from Class import Client
@@ -91,8 +91,8 @@ async def get_advert(id: int):
 
 
 @app.patch("/adverts/{id}", tags=["adverts"])
-async def update_advert(id: int, req: Advert.Advert):
-  res = Advert.update(id, {"content": "updated!"})
+async def update_advert(id: int, req: Request):
+  res = Advert.update(id, await req.json())
   return res
 
 
@@ -129,10 +129,12 @@ async def generate_test_data():
                end_date="2019-12-31")
   Campaign.add(client_id=2,
                title="상반기 캠페인",
-               advert_id_list=[],
+               advert_id_list=[1],
                start_date="2022-01-01",
                end_date="2022-05-31")
   Campaign.add(client_id=2, title="12월 연휴 캠페인", advert_id_list=[])
+
+  Advert.add(2, "TV 광고", "방송 3사 광고", "1.기획\n2.집행", "2022-01-01", "2022-05-05")
 
   return "OK"
 

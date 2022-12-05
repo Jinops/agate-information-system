@@ -6,10 +6,10 @@ from . import utils
 class Advert(BaseModel):
   id: Union[int, None]
   campaign_id: int = None
-  title: str = ""
-  content: str = ""
-  progress: str = ""
-  start_date: str = utils.get_today()
+  title: str
+  content: str
+  progress: str
+  start_date: str
   end_date: str = utils.get_day_after(7)
 
 
