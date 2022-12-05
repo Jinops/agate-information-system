@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request
 import uvicorn
 
+from Class import Staff
 from Class import Client
 from Class import Campaign
 from Class import Advert
@@ -95,14 +96,19 @@ async def get_advert_by_campaign(campaign_id: int):
 
 @app.get("/test")
 async def generate_test_data():
+  Staff.add("진우", "010-0000", Staff.Staff_grade.CAMPAIGN_STAFF)
+  Staff.add("혁중", "010-0000", Staff.Staff_grade.ACCOUNTANT)
+  Staff.add("도영", "010-0000", Staff.Staff_grade.CONTACT_STAFF)
+  Staff.add("채민", "010-0000", Staff.Staff_grade.STAFF)
+
   Client.add(staff_id=1, name="오리온", tel_number="010-0000")
   Client.add(staff_id=1, name="삼성", tel_number="010-0000")
   Client.add(staff_id=1, name="LG", tel_number="010-0000")
-  Client.add(staff_id=2, name="롯데", tel_number="010-0000")
-  Client.add(staff_id=2, name="코카콜라", tel_number="010-0000")
-  Client.add(staff_id=2, name="카시오", tel_number="010-0000")
+  Client.add(staff_id=1, name="롯데", tel_number="010-0000")
+  Client.add(staff_id=3, name="코카콜라", tel_number="010-0000")
+  Client.add(staff_id=3, name="카시오", tel_number="010-0000")
   Client.add(staff_id=3, name="Apple", tel_number="010-0000")
-  Client.add(staff_id=4, name="수원시청", tel_number="010-0000")
+  Client.add(staff_id=3, name="수원시청", tel_number="010-0000")
 
   Campaign.add(client_id=1, title="고전 캠페인", start_date="2019-01-01", end_date="2019-12-31")
   Campaign.add(client_id=2, title="12월 연휴 캠페인", start_date="2022-12-01", end_date="")
