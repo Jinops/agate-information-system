@@ -12,7 +12,7 @@ class Staff_grade(Enum):
 
 class Staff(BaseModel):
     id: Union[int, None]
-    name: int
+    name: str
     tel_number: str
     grade: Staff_grade
 
