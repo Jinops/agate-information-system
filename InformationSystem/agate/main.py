@@ -1,10 +1,15 @@
 from fastapi import FastAPI, Request
+from pydantic import BaseModel
+from typing import List, Union
 import uvicorn
 
 from entity import staff
 from entity import client
 from entity import campaign
 from entity import advert
+
+class Empty(BaseModel):
+  pass
 
 tags_metadata = [
   {
@@ -25,98 +30,98 @@ app = FastAPI(openapi_tags=tags_metadata)
 
 ## staff
 
-@app.get("/staff", tags=["staff"])
+@app.get("/staff", tags=["staff"], response_model=List[staff.Staff])
 async def get_all_staff():
   res = staff.get_all()
   return res
 
-@app.post("/staff", tags=["staff"])
+@app.post("/staff", tags=["staff"], response_model=Union[staff.Staff,Empty])
 async def add_staff(req: staff.Staff):
   res = staff.add(req.name, req.tel_number, req.grade)
   return res
 
-@app.get("/staff/{id}", tags=["staff"])
+@app.get("/staff/{id}", tags=["staff"], response_model=Union[staff.Staff,Empty])
 async def get_staff(id: int):
   res = staff.get(id)
   return res
   
-@app.patch("/staff/{id}", tags=["staff"])
+@app.patch("/staff/{id}", tags=["staff"], response_model=Union[staff.Staff,Empty])
 async def update_staff(id: int, req: Request):
   res = staff.update(id, await req.json())
   return res
 
 ## client
 
-@app.get("/clients", tags=["clients"])
+@app.get("/clients", tags=["clients"], response_model=List[client.Client])
 async def get_all_client():
   res = client.get_all()
   return res
 
-@app.post("/clients", tags=["clients"])
+@app.post("/clients", tags=["clients"], response_model=Union[client.Client,Empty])
 async def add_client(req: client.Client):
   res = client.add(req.staff_id, req.name, req.tel_number)
   return res
 
-@app.get("/clients/{id}", tags=["clients"])
+@app.get("/clients/{id}", tags=["clients"], response_model=Union[client.Client,Empty])
 async def get_client(id: int):
   res = client.get(id)
   return res
 
-@app.patch("/clients/{id}", tags=["clients"])
+@app.patch("/clients/{id}", tags=["clients"], response_model=Union[client.Client,Empty])
 async def update_client(id: int, req: Request):
   res = client.update(id, await req.json())
   return res
   
 ## campaign
 
-@app.get("/campaigns", tags=["campaigns"])
+@app.get("/campaigns", tags=["campaigns"], response_model=List[campaign.Campaign])
 async def get_all_campaign():
   res = campaign.get_all()
   return res
 
-@app.post("/campaigns", tags=["campaigns"])
+@app.post("/campaigns", tags=["campaigns"], response_model=Union[campaign.Campaign,Empty])
 async def add_campaign(req: campaign.Campaign):
   res = campaign.add(req.client_id, req.title, req.start_date, req.end_date)
   return res
 
-@app.get("/campaigns/{id}", tags=["campaigns"])
+@app.get("/campaigns/{id}", tags=["campaigns"], response_model=Union[campaign.Campaign,Empty])
 async def get_campaign(id: int):
   res = campaign.get(id)
   return res
 
-@app.patch("/campaigns/{id}", tags=["campaigns"])
+@app.patch("/campaigns/{id}", tags=["campaigns"], response_model=Union[campaign.Campaign,Empty])
 async def update_campaign(id: int, req: Request):
   res = campaign.update(id, await req.json())
   return res
 
-@app.get("/campaigns/by_client/{client_id}", tags=["campaigns"])
+@app.get("/campaigns/by_client/{client_id}", tags=["campaigns"], response_model=List[campaign.Campaign])
 async def get_campaign_by_client(client_id: int):
   res = campaign.get_list_by_client(client_id)
   return res
   
 ## advert
 
-@app.get("/adverts", tags=["adverts"])
+@app.get("/adverts", tags=["adverts"], response_model=List[advert.Advert])
 async def get_all_advert():
   res = advert.get_all()
   return res
 
-@app.post("/adverts", tags=["adverts"])
+@app.post("/adverts", tags=["adverts"], response_model=Union[advert.Advert,Empty])
 async def add_advert(req: advert.Advert):
   res = advert.add(req.campaign_id, req.title, req.content, req.progress, req.start_date, req.end_date)
   return res
 
-@app.get("/adverts/{id}", tags=["adverts"])
+@app.get("/adverts/{id}", tags=["adverts"], response_model=Union[advert.Advert,Empty])
 async def get_advert(id: int):
   res = advert.get(id)
   return res
 
-@app.patch("/adverts/{id}", tags=["adverts"])
+@app.patch("/adverts/{id}", tags=["adverts"], response_model=Union[advert.Advert,Empty])
 async def update_advert(id: int, req: Request):
   res = advert.update(id, await req.json())
   return res
 
-@app.get("/adverts/by_campaign/{campaign_id}", tags=["adverts"])
+@app.get("/adverts/by_campaign/{campaign_id}", tags=["adverts"], response_model=List[advert.Advert])
 async def get_advert_by_campaign(campaign_id: int):
   res = advert.get_list_by_campaign(campaign_id)
   return res

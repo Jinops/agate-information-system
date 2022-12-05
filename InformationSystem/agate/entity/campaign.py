@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Union
+from typing import Union
 from . import utils
 
 class Campaign(BaseModel):
