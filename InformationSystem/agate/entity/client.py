@@ -4,9 +4,9 @@ from . import utils
 
 class Client(BaseModel):
   id: Union[int, None]
-  staff_id: int = None
-  name: str = ""
-  tel_number: str = ""
+  staff_id: int
+  name: str
+  tel_number: str 
 
 db = []  # dictionary list
 

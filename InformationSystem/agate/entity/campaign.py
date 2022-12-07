@@ -4,8 +4,8 @@ from . import utils
 
 class Campaign(BaseModel):
   id: Union[int, None]
-  client_id: int = None
-  title: str = ""
+  client_id: int
+  title: str
   start_date: str = utils.get_today()
   end_date: str = utils.get_day_after(7)
 

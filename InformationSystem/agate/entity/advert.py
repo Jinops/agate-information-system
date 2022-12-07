@@ -4,7 +4,7 @@ from . import utils
 
 class Advert(BaseModel):
   id: Union[int, None]
-  campaign_id: int = None
+  campaign_id: int
   title: str
   content: str
   progress: str
