@@ -146,9 +146,9 @@ async def get_advert_by_campaign(campaign_id: int):
 @app.get("/")
 async def main():
   return "OK"
-
-@app.get("/test")
-async def generate_test_data():
+  
+@app.on_event("startup")
+async def startup_event():
   staff.add("진우", "010-0000", staff.Staff_grade.CAMPAIGN_STAFF)
   staff.add("혁중", "010-0000", staff.Staff_grade.ACCOUNTANT)
   staff.add("도영", "010-0000", staff.Staff_grade.CAMPAIGN_MANAGER)
@@ -168,7 +168,5 @@ async def generate_test_data():
 
   advert.add(1, "TV 광고", "방송 3사 광고", "1.기획\n2.집행", "2022-01-01", "2022-05-05")
   advert.add(1, "Youtube 광고", "유튜브 인플루은서 광고", "1.컨텍 준비", "2022-04-03", "")
-
-  return "OK"
-
+  
 uvicorn.run(app, host="0.0.0.0", port=8000)

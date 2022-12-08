@@ -9,7 +9,6 @@ def get_new_id(db):
 
 def search(db, key, value):
   for dict in db:
-    print(dict[key], value)
     if dict[key] == value:
       return dict
   return {}
@@ -17,7 +16,6 @@ def search(db, key, value):
 def searches(db, key, value):
   result = []
   for dict in db:
-    print(dict[key], value)
     if dict[key] == value:
       result.append(dict)
   return result
