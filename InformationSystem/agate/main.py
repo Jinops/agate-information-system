@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, status
 from pydantic import BaseModel
 from typing import List, Union
 import uvicorn
@@ -31,7 +31,18 @@ tags_metadata = [
 ]  # https://ie.jinwoop.repl.co/docs
 app = FastAPI(openapi_tags=tags_metadata)
 
-
+#### for loging
+import logging
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+	exc_str = f'{exc}'.replace('\n', ' ').replace('   ', ' ')
+	logging.error(f"{request}: {exc_str}")
+	content = {'status_code': 10422, 'message': exc_str, 'data': None}
+	return JSONResponse(content=content, status_code=status.HTTP_422_UNPROCESSABLE_ENTITY)
+################
+  
 ## staff
 
 @app.get("/staffs", tags=["staffs"], response_model=List[staff.Staff])
@@ -155,8 +166,8 @@ async def generate_test_data():
   campaign.add(client_id=1, title="고전 캠페인", start_date="2019-01-01", end_date="2019-12-31")
   campaign.add(client_id=2, title="12월 연휴 캠페인", start_date="2022-12-01", end_date="")
 
-  advert.add(2, "TV 광고", "방송 3사 광고", "1.기획\n2.집행", "2022-01-01", "2022-05-05")
-  advert.add(2, "Youtube 광고", "유튜브 인플루은서 광고", "1.컨텍 준비", "2022-04-03", "")
+  advert.add(1, "TV 광고", "방송 3사 광고", "1.기획\n2.집행", "2022-01-01", "2022-05-05")
+  advert.add(1, "Youtube 광고", "유튜브 인플루은서 광고", "1.컨텍 준비", "2022-04-03", "")
 
   return "OK"
 
