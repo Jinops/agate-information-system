@@ -1,10 +1,10 @@
 # agate-infromation-system
 
-![class_diagram](/etc/class_diagram.png)
-
 Server of Agate Ltd.'s CMS
   
 Agate 사의 광고 컨텐츠 관리 시스템(CMS) 서버
+
+![class_diagram](/etc/class_diagram.png)
 
 
 ## 목적
