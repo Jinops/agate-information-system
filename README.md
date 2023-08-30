@@ -13,8 +13,7 @@ Agate 사의 광고 컨텐츠 관리 시스템(CMS) 서버
 2. 가상의 요구사항에 맞는 광고 생성, 관리, 고객 연결 등의 기능을 개발합니다.
 3. 각 기능을 Rest API로 제공합니다.
 
-## 기획 출처
-- Object-Oriented Systems Analysis and Design Using UML (2010, Simon Bennett & Ray Farmer)
+_기획 출처: Object-Oriented Systems Analysis and Design Using UML (2010, Simon Bennett & Ray Farmer)_
 
 ## 주요 기능
 1. 고객 관리 (`/clinets`)
